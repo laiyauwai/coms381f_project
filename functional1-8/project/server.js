@@ -475,11 +475,12 @@ app.get('/api/restaurant/borough/:borough', (req,res) => {
             });
         });
     } else {
-        res.status(500).json({"error": "missing borough"});
+        res.status(500).json({"error": "missing bookingid"});
     }
 })
 
 app.get('/api/restaurant/cuisine/:cuisine', (req,res) => {
+    console.log(req.body)
     if (req.params.cuisine) {
         let criteria = {};
         criteria['cuisine'] = req.params.cuisine;
@@ -499,8 +500,10 @@ app.get('/api/restaurant/cuisine/:cuisine', (req,res) => {
         res.status(500).json({"error": "missing cuisine"});
     }
 })
+
 app.get('/*', (req,res) => {
     //res.status(404).send(`${req.path} - Unknown request!`);
-    res.status(404).render('info', {message: `${req.path} - Unknown request!` });
+    res.status(404).render('error', {message: `${req.path} - Unknown request!` });
 })
+
 app.listen(process.env.PORT || 8099);
