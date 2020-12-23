@@ -1,0 +1,23 @@
+<http>
+    <body>
+        <h1>Create restaurant</h1><br>
+        <p>Name is mandatory</p><br>
+
+        <form action="/create" method="POST" enctype="multipart/form-data">
+            Restaurant ID: <input type="text" name="restaurant_id"><br>
+            Name: <input type="text" name="name"><br>
+            Borough: <input type="text" name="borough"><br>
+            Cuisine: <input type="text" name="cuisine"><br>
+            Photo: <input type="file" name="photo"><br>
+            Photo mimetype: <input type="text" name="photo_mimetype"><br>
+            Street: <input type="text" name="street"><br>
+            Building: <input type="text" name="building"><br>
+            Zipcode: <input type="text" name="zipcode"><br>
+            Coordinates(lon.): <input type="float" name="lon"><br>
+            Coordinates(lat.): <input type="float" name="lat"><br>
+            <input type="hidden" name="owner" value=<%= owner %>>
+            <input type="submit" value="Add">
+            <a href="/">Cancel</a>
+        </form>
+    </body>
+</http>

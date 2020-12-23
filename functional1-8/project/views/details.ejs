@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" 
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" 
+        crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" 
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" 
+        crossorigin=""></script>
+    </head>
+
+    <body>
+        <h1>Restaurant details</h1><br>
+        <p>Restaurant ID: <%= restaurant.restaurant_id %></p><br>
+        <p>Name: <%= restaurant.name %> </p><br>
+        <p>Borough: <%= restaurant.borough %> </p><br>
+        <p>Cuisine: <%= restaurant.cuisine %> </p><br>
+
+        <% if (restaurant.photo) { %>
+            <img src="data:image/jpg;base64, <%= restaurant.photo %>"><br>
+            <p>Photo mimetype: <%= restaurant.photo_mimetype%> </p> <br>
+        <% } %>
+
+        <p>Street: <%= restaurant.address.street %> </p><br>
+        <p>Building: <%= restaurant.address.building %> </p><br>
+        <p>Zipcode: <%= restaurant.address.zipcode %> </p><br>
+        <p>Coordinates(lon.): <%= restaurant.address.coord[0] %> </p><br>
+        <p>Coordinates(lat.): <%= restaurant.address.coord[1] %> </p><br>
+        <p>Map</p><br>
+        <div id="map" style="width:900px; height:580px"></div>
+        
+        <script>
+            var mapOptions = {
+                center: [<%= restaurant.address.coord[0] %>, <%= restaurant.address.coord[1] %>],
+                zoom: <%= zoom %>
+            }
+
+            var map = new L.map('map', mapOptions);
+            var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+            map.addLayer(layer);
+            var marker = L.marker([<%= restaurant.address.coord[0]%>, <%= restaurant.address.coord[1] %>]);
+            marker.addTo(map);
+
+        </script>
+        <p>Owned by: <%= restaurant.owner %></p>
+        <p>Rating:</p>
+        <%if (restaurant.grades) { %>
+            <% for (var grade of restaurant.grades) { %>
+                <p><%= grade.score%> (<%= grade.user%>)</p>
+            <% } %>
+        <% } %>
+
+        <br><br>
+        <a href="/rate?_id=<%=restaurant._id%>">Rate</a>
+        <a href="/edit?_id=<%=restaurant._id%>">Edit</a>
+        <a href="/delete?_id=<%=restaurant._id%>&owner=<%=restaurant.owner%>">Delete</a>
+        <a href="/">Back to main page</a>
+    </body>
+</html>

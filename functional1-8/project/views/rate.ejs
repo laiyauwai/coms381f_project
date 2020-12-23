@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <p>Score from 1 to 10:</p>
+        <form action="/score">
+            <input type="number" name="score" min="1" max="10"><br>
+            <input type="hidden" name="user" value=<%= name %>>
+            <input type="hidden" name="_id" value=<%= restaurant %>>
+            <input type="submit" value="submit">
+        </form>
+    </body>
+</html>

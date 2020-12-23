@@ -1,0 +1,13 @@
+<html>
+   <body>
+      
+      <h2>found <%=nRestaurants%> restaurant(s)</h2><br>
+      <h2>Restaurant Name</h2><br>
+      <ul>
+         <%for (var restaurant of restaurants) {%>
+            <li><a href="details?_id=<%=restaurant._id%>"><%=restaurant.name%></a></li>
+         <%}%>
+      </ul>
+      <a href="/">Back to main page</a>
+   </body>
+</html>
