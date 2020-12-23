@@ -458,7 +458,47 @@ app.get('/api/restaurant/name/:name', (req,res) => {
         res.status(500).json({"error": "missing resturant name"});
     }
 })
+app.get('/api/restaurants/borough/:borough', (req,res) => {
+    if (req.params.borough) {
+        let criteria = {};
+        criteria['borough'] = req.params.borough;
+        const client = new MongoClient(mongourl);
+        client.connect((err) => {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+            const db = client.db(dbName);
 
+            findDocument(db, criteria, (docs) => {
+                client.close();
+                console.log("Closed DB connection");
+                res.status(200).json(docs);
+            });
+        });
+    } else {
+        res.status(500).json({"error": "missing borough"});
+    }
+})
+
+app.get('/api/restaurants/cuisine/:cuisine', (req,res) => {
+    if (req.params.cuisine) {
+        let criteria = {};
+        criteria['cuisine'] = req.params.cuisine;
+        const client = new MongoClient(mongourl);
+        client.connect((err) => {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+            const db = client.db(dbName);
+
+            findDocument(db, criteria, (docs) => {
+                client.close();
+                console.log("Closed DB connection");
+                res.status(200).json(docs);
+            });
+        });
+    } else {
+        res.status(500).json({"error": "missing cuisine"});
+    }
+})
 app.get('/*', (req,res) => {
     //res.status(404).send(`${req.path} - Unknown request!`);
     res.status(404).render('info', {message: `${req.path} - Unknown request!` });
