@@ -438,7 +438,7 @@ app.get('/score', (req,res) => {
     handle_Score(req,res,req.query);
 });
 
-app.get('/api/restaurants/name/:name', (req,res) => {
+app.get('/api/restaurant/name/:name', (req,res) => {
     if (req.params.name) {
         let criteria = {};
         criteria['name'] = req.params.name;
