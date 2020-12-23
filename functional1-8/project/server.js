@@ -458,7 +458,7 @@ app.get('/api/restaurant/name/:name', (req,res) => {
         res.status(500).json({"error": "missing resturant name"});
     }
 })
-app.get('/api/restaurants/borough/:borough', (req,res) => {
+app.get('/api/restaurant/borough/:borough', (req,res) => {
     if (req.params.borough) {
         let criteria = {};
         criteria['borough'] = req.params.borough;
@@ -479,7 +479,7 @@ app.get('/api/restaurants/borough/:borough', (req,res) => {
     }
 })
 
-app.get('/api/restaurants/cuisine/:cuisine', (req,res) => {
+app.get('/api/restaurant/cuisine/:cuisine', (req,res) => {
     if (req.params.cuisine) {
         let criteria = {};
         criteria['cuisine'] = req.params.cuisine;
